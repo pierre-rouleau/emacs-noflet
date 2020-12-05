@@ -73,6 +73,7 @@ name."
                           (cl-function
                            (lambda ,args
                              (let ((this-fn ,saved-func-namev))
+                               (ignore this-fn)
                                ,@body)))))))))
        (fresets
         (cl-loop
@@ -101,6 +102,7 @@ name."
                      (condition-case err
                          (symbol-function (quote ,name))
                        (void-function
+                        (ignore err)
                         (symbol-function (quote noflet|base)))))))))))
     `(let ,lets
        (unwind-protect
